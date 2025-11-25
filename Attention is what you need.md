@@ -24,6 +24,9 @@ Ils proposent une architecture de traduction **sans aucune récursivité ni conv
   \text{Attention}(Q,K,V)
   = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right) V
   $$
+
+
+  où: 
 Q (Query) : "requête"
 
 Il s’agit d’un vecteur (ou matrice) représentant ce que l’on cherche à récupérer ou comparer.
