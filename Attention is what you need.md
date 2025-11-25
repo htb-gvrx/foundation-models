@@ -29,38 +29,20 @@ Ils proposent une architecture de traduction **sans aucune récursivité ni conv
   où: 
 Q (Query) : "requête"
 
-Il s’agit d’un vecteur (ou matrice) représentant ce que l’on cherche à récupérer ou comparer.
-
-Pour chaque position analysée dans la séquence, un vecteur “query” est produit.
+Il s’agit d’un vecteur (ou matrice) représentant ce que l’on cherche à récupérer ou comparer. Pour chaque position analysée dans la séquence, un vecteur “query” est produit.
 
 K (Key) : "clé"
 
-Le vecteur "key" sert à représenter comment chaque élément/mot peut être “retrouvé” ou “adressé”.
-
-Chaque mot/élément de la séquence dispose d’un vecteur clé.
+Le vecteur "key" sert à représenter comment chaque élément/mot peut être “retrouvé” ou “adressé”. Chaque mot/élément de la séquence dispose d’un vecteur clé.
 
 V (Value) : "valeur"
 
-Le vecteur "value" transporte le contenu à extraire si la clé correspond à une requête.
+Le vecteur "value" transporte le contenu à extraire si la clé correspond à une requête. Chaque élément a également un vecteur valeur.
 
-Chaque élément a également un vecteur valeur.
+dₖ : "dimension des clés" 
 
-dₖ : "dimension des clés" (souvent noté 
-d
-k
-d 
-k
- )
-
-C’est la dimension/longueur des vecteurs “key” (et “query”).
-
-Le terme 
-d
-k
-d 
-k
- 
-  dans le dénominateur sert à normaliser le produit scalaire des requêtes et des clés pour éviter des valeurs trop grandes, ce qui stabilise l’apprentissage.
+C’est la dimension/longueur des vecteurs “key” (et “query”). Le terme 
+d_k dans le dénominateur sert à normaliser le produit scalaire des requêtes et des clés pour éviter des valeurs trop grandes, ce qui stabilise l’apprentissage.
 
 Résumé :
 
