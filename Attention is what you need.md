@@ -18,6 +18,40 @@ Ils proposent une architecture de traduction **sans aucune récursivité ni conv
 
 ### 2.1 Self-attention multi-tête (multi-head self-attention)
 
+
+
+####1. vecteurs Q, K, V (query, key, value)**
+
+- On commence par représenter chaque mot de la phrase sous forme d’un vecteur.
+- Pour chaque mot, on crée trois nouveaux vecteurs :
+  - Query (Q) : ce qu’il recherche dans les autres mots
+  - Key (K) : comment il se décrit lui-même pour être “retrouvé”
+  - Value (V) : l’information qu’il transporte
+
+- Q, K, V sont obtenus par multiplication des vecteurs de départ par des matrices de poids :
+  - Q = embedding * W_Q
+  - K = embedding * W_K
+  - V = embedding * W_V
+
+####2. Calcul des scores d’attention####
+
+- Pour chaque mot, on compare son query à la key de chaque mot (produit scalaire).
+- Cela donne un score d’attention pour chaque paire.
+
+####3. Normalisation et pondération**
+
+- On rend ces scores comparables (et stables) en les divisant par la racine carrée de la taille des vecteurs key (dimension de K).
+- On applique *softmax* à la liste des scores pour chaque mot, ce qui transforme ces valeurs en poids qui vont de 0 à 1 et dont la somme fait 1.
+
+####4. Combinaison finale**
+
+- On fait la somme pondérée des valeurs (V) de chaque mot par ces poids : chaque mot “rassemble” de l’information des autres mots selon l’importance calculée.
+
+En résumé :  
+Chaque mot se transforme en (Q, K, V), “regarde” tous les autres via un calcul de similarité, puis fusionne l’information du contexte de façon intelligente pour chaque étape.
+
+
+
 - **Scaled dot-product attention** :
 
   $$
@@ -27,17 +61,6 @@ Ils proposent une architecture de traduction **sans aucune récursivité ni conv
 
 
   où: 
-Q (Query) : "requête"
-
-Il s’agit d’un vecteur (ou matrice) représentant ce que l’on cherche à récupérer ou comparer. Pour chaque position analysée dans la séquence, un vecteur “query” est produit.
-
-K (Key) : "clé"
-
-Le vecteur "key" sert à représenter comment chaque élément/mot peut être “retrouvé” ou “adressé”. Chaque mot/élément de la séquence dispose d’un vecteur clé.
-
-V (Value) : "valeur"
-
-Le vecteur "value" transporte le contenu à extraire si la clé correspond à une requête. Chaque élément a également un vecteur valeur.
 
 dₖ : "dimension des clés" 
 
@@ -217,4 +240,4 @@ Les figures d’attention sont séduisantes, mais :
 - on voit que certaines têtes suivent des dépendances linguistiques,  
 - l’article ne démontre pas que l’attention est globalement interprétable ni fiable comme outil d’explication.
 
-C’est une ouverture intéressante, pas encore une solution d’XAI.
+C’est une ouverture intéressante, pas encore une solution d’XAI (eXplainable AI)
