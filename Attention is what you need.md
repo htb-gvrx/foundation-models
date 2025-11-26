@@ -20,7 +20,7 @@ Ils proposent une architecture de traduction **sans aucune récursivité ni conv
 
 
 
-####1. vecteurs Q, K, V (query, key, value)**
+#### 1. vecteurs Q, K, V (query, key, value)
 
 - On commence par représenter chaque mot de la phrase sous forme d’un vecteur.
 - Pour chaque mot, on crée trois nouveaux vecteurs :
@@ -32,18 +32,33 @@ Ils proposent une architecture de traduction **sans aucune récursivité ni conv
   - Q = embedding * W_Q
   - K = embedding * W_K
   - V = embedding * W_V
+ 
+$$
+\text{Q}
+= \text{embedding}\cdot W_Q
+$$
 
-####2. Calcul des scores d’attention####
+$$
+\text{K}
+= \text{embedding}\cdot W_K
+$$
+
+$$
+\text{V}
+= \text{embedding}\cdot W_V
+$$
+
+#### 2. Calcul des scores d’attention
 
 - Pour chaque mot, on compare son query à la key de chaque mot (produit scalaire).
 - Cela donne un score d’attention pour chaque paire.
 
-####3. Normalisation et pondération**
+#### 3. Normalisation et pondération
 
 - On rend ces scores comparables (et stables) en les divisant par la racine carrée de la taille des vecteurs key (dimension de K).
 - On applique *softmax* à la liste des scores pour chaque mot, ce qui transforme ces valeurs en poids qui vont de 0 à 1 et dont la somme fait 1.
 
-####4. Combinaison finale**
+#### 4. Combinaison finale
 
 - On fait la somme pondérée des valeurs (V) de chaque mot par ces poids : chaque mot “rassemble” de l’information des autres mots selon l’importance calculée.
 
@@ -65,7 +80,7 @@ Chaque mot se transforme en (Q, K, V), “regarde” tous les autres via un calc
 dₖ : "dimension des clés" 
 
 C’est la dimension/longueur des vecteurs “key” (et “query”). Le terme 
-d_k dans le dénominateur sert à normaliser le produit scalaire des requêtes et des clés pour éviter des valeurs trop grandes, ce qui stabilise l’apprentissage.
+$$ d_k $$ dans le dénominateur sert à normaliser le produit scalaire des requêtes et des clés pour éviter des valeurs trop grandes, ce qui stabilise l’apprentissage.
 
 Résumé :
 
